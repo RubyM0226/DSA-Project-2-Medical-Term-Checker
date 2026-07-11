@@ -27,6 +27,8 @@ Then pick from the menu:
 
 **Benchmark (trie vs hash map):**
 g++ -std=c++17 -O2 -static -o benchmark.exe benchmark.cpp
+
+
 ./benchmark.exe
 
 Prints a timing table and writes benchmark_results.csv (open in Excel or just read the data in excel/compiler)
