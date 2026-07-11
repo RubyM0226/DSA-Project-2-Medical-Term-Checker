@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Trie.h"
-//#include "HashMap.h"
+#include "HashMap.h"
 
 
 using namespace std;
@@ -20,7 +20,7 @@ vector<string> loadTerms(const string& filename) {
         return terms;
     }
 
-    std::string line;
+    string line;
     while(getline(file, line)) {
         if(!line.empty()) {
             terms.push_back(line);
@@ -30,9 +30,6 @@ vector<string> loadTerms(const string& filename) {
     cout << "Loaded " << terms.size() << " terms from " << filename << "\n";
     return terms;
 }
-
-
-
 
 
 void printMenu() {
@@ -49,15 +46,13 @@ void printMenu() {
 
 
 // MENU OPTION 1
-void exactSearch(/*HashMap& hashMap*/) {
+void exactSearch(HashMap& hashMap) {
     cout << "\nEnter a term to look up: ";
     string query;
     cin.ignore();
-    getline(std::cin, query);
+    getline(cin, query);
 
-    // placeholder for hash map
-    // bool found = hashMap.search(query);
-    bool found = false;
+    bool found = hashMap.search(query);
 
     if(found) {
         cout << "  [FOUND] \"" << query << "\" found in database.\n";
@@ -111,12 +106,12 @@ int main() {
     cout << "Trie built with " << trie.size() << " terms.\n";
 
 
-    // std::cout << "Building Hash Map...\n";
-    // HashMap hashMap;
-    // for (const std::string& term : terms) {
-    //     hashMap.insert(term);
-    // }
-    // std::cout << "Hash Map built.\n";
+    cout << "Building Hash Map...\n";
+    HashMap hashMap;
+    for(const string& term : terms) {
+         hashMap.insert(term);
+    }
+    cout << "Hash Map built.\n";
 
 
     int choice = 0;
@@ -126,7 +121,7 @@ int main() {
 
         switch(choice) {
             case 1:
-                exactSearch(/*hashMap*/);
+                exactSearch(hashMap);
                 break;
             case 2:
                 autocompleteSearch(trie);
